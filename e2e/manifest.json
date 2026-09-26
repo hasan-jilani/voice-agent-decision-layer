@@ -1,0 +1,158 @@
+[
+ {
+  "id": "STR-01",
+  "text": "What's my current balance and what plan am I on?",
+  "wav": "audio/STR-01.wav",
+  "voice": "flux-haley-en",
+  "label": "get_account_summary",
+  "account": {
+   "authenticated": true,
+   "notes": [],
+   "outage_checked": false,
+   "diagnostics_run": false
+  }
+ },
+ {
+  "id": "STR-08",
+  "text": "My internet has been dropping out all morning.",
+  "wav": "audio/STR-08.wav",
+  "voice": "flux-marcus-en",
+  "label": "check_outage_status",
+  "account": {
+   "authenticated": true,
+   "notes": [],
+   "outage_checked": false,
+   "diagnostics_run": false
+  }
+ },
+ {
+  "id": "AUT-01",
+  "text": "What's my balance?",
+  "wav": "audio/AUT-01.wav",
+  "voice": "flux-elise-en",
+  "label": "authenticate_customer",
+  "account": {
+   "authenticated": false,
+   "notes": [],
+   "outage_checked": false,
+   "diagnostics_run": false
+  }
+ },
+ {
+  "id": "AUT-04",
+  "text": "There's a charge on my bill I don't recognize.",
+  "wav": "audio/AUT-04.wav",
+  "voice": "flux-donovan-en",
+  "label": "authenticate_customer",
+  "account": {
+   "authenticated": false,
+   "notes": [],
+   "outage_checked": false,
+   "diagnostics_run": false
+  }
+ },
+ {
+  "id": "KEY-01",
+  "text": "There's a forty dollar charge here I don't recognize at all.",
+  "wav": "audio/KEY-01.wav",
+  "voice": "flux-priya-en",
+  "label": "get_billing_history",
+  "account": {
+   "authenticated": true,
+   "notes": [],
+   "outage_checked": false,
+   "diagnostics_run": false
+  }
+ },
+ {
+  "id": "KEY-07",
+  "text": "Send a technician out, my connection is terrible.",
+  "wav": "audio/KEY-07.wav",
+  "voice": "flux-wade-en",
+  "label": "check_outage_status",
+  "account": {
+   "authenticated": true,
+   "notes": [],
+   "outage_checked": false,
+   "diagnostics_run": false
+  }
+ },
+ {
+  "id": "KEY-10",
+  "text": "Someone charged four hundred dollars to my account and it wasn't me.",
+  "wav": "audio/KEY-10.wav",
+  "voice": "flux-haley-en",
+  "label": "report_fraud",
+  "account": {
+   "authenticated": true,
+   "notes": [],
+   "outage_checked": false,
+   "diagnostics_run": false
+  }
+ },
+ {
+  "id": "SEQ-01",
+  "text": "Still dropping out. You already checked for outages, right?",
+  "wav": "audio/SEQ-01.wav",
+  "voice": "flux-marcus-en",
+  "label": "run_line_diagnostics",
+  "account": {
+   "authenticated": true,
+   "notes": [],
+   "outage_checked": true,
+   "diagnostics_run": false
+  }
+ },
+ {
+  "id": "FRD-01",
+  "text": "There are three charges from a city I've never been to.",
+  "wav": "audio/FRD-01.wav",
+  "voice": "flux-elise-en",
+  "label": "report_fraud",
+  "account": {
+   "authenticated": true,
+   "notes": [],
+   "outage_checked": false,
+   "diagnostics_run": false
+  }
+ },
+ {
+  "id": "SWI-01",
+  "text": "I want to cancel my service. Actually, hold on, first can you tell me what I'm currently paying?",
+  "wav": "audio/SWI-01.wav",
+  "voice": "flux-donovan-en",
+  "label": "get_account_summary",
+  "account": {
+   "authenticated": true,
+   "notes": [],
+   "outage_checked": false,
+   "diagnostics_run": false
+  }
+ },
+ {
+  "id": "SWI-03",
+  "text": "Can you check my last bill? No wait, the internet thing is more urgent, it's completely dead.",
+  "wav": "audio/SWI-03.wav",
+  "voice": "flux-priya-en",
+  "label": "check_outage_status",
+  "account": {
+   "authenticated": true,
+   "notes": [],
+   "outage_checked": false,
+   "diagnostics_run": false
+  }
+ },
+ {
+  "id": "ESC-03",
+  "text": "Do you sell home insurance?",
+  "wav": "audio/ESC-03.wav",
+  "voice": "flux-wade-en",
+  "label": "transfer_to_human",
+  "account": {
+   "authenticated": true,
+   "notes": [],
+   "outage_checked": false,
+   "diagnostics_run": false
+  }
+ }
+]

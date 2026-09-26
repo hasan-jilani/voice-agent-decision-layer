@@ -1,0 +1,392 @@
+<title>Tool Routing Race</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Deepgram brand palette -- committed dark theme, matching tts-comparison-demo */
+:root{
+  color-scheme:dark;
+  --bg:#101014; --surface:#1A1A1F; --surface-2:#232329; --raised:#2C2C33;
+  --ink:#FBFBFF; --ink-2:#BBBBBF; --ink-3:#949498;
+  --line:#232329; --line-2:#1F1F25; --line-strong:#4E4E52;
+  --jev:#13EF93; --jev-soft:rgba(19,239,147,.12); --jev-dark:#075433;
+  --llm:#149AFB; --llm-soft:rgba(20,154,251,.12);
+  --bad:#F04438; --bad-soft:rgba(240,68,56,.13);
+  --shadow:0 10px 30px rgba(0,0,0,.5);
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1400px;margin:0 auto;padding-inline:20px;padding-block:32px 44px}
+
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--jev);margin:0 0 12px}
+h1{font-size:clamp(26px,4.6vw,40px);line-height:1.12;letter-spacing:-.025em;margin:0 0 12px;
+  font-weight:600;text-wrap:balance;color:var(--ink)}
+.lede{margin:0;color:var(--ink-2);font-size:15.5px;line-height:1.6}
+.lede b{color:var(--ink);font-weight:600}
+
+.controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:26px 0 20px;
+  padding-block:16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+button{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--ink);
+  background:var(--surface);border:1px solid var(--line-strong);border-radius:8px;
+  padding:8px 14px;cursor:pointer;transition:border-color .18s,box-shadow .18s,background .18s}
+button:hover{border-color:var(--jev)}
+button:focus-visible{outline:2px solid var(--jev);outline-offset:2px}
+#run{background:var(--jev);color:#0B0B0C;border-color:var(--jev);font-weight:600;min-width:98px}
+#run:hover{box-shadow:0 5px 15px rgba(19,239,147,.4)}
+.seg{display:flex;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;
+  background:var(--surface)}
+.seg button{border:0;border-radius:0;border-left:1px solid var(--line-strong);padding:8px 12px}
+.seg button:first-child{border-left:0}
+.seg button:hover{background:var(--raised)}
+.seg button[aria-pressed="true"]{background:var(--jev);color:#0B0B0C;font-weight:600}
+.ctl-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);margin-left:6px}
+.spacer{flex:1 1 auto;min-width:0}
+
+.race{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:820px){.race{grid-template-columns:1fr}}
+
+.lane{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+.lane.jev{border-top:3px solid var(--jev)}
+.lane.llm{border-top:3px solid var(--llm)}
+.lane-head{padding:16px 20px 0}
+.engine{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.engine .nm{font-size:17px;font-weight:600;letter-spacing:-.015em}
+.jev .engine .nm{color:var(--jev)} .llm .engine .nm{color:var(--llm)}
+.engine .md{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+.role{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);margin-top:6px}
+
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px 20px 15px}
+.stat .k{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:5px}
+.stat .v{font-family:var(--mono);font-size:clamp(24px,3.6vw,32px);font-weight:600;
+  letter-spacing:-.025em;font-variant-numeric:tabular-nums;line-height:1}
+.jev .stat .v{color:var(--jev)} .llm .stat .v{color:var(--llm)}
+.stat .sub{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:6px;
+  font-variant-numeric:tabular-nums}
+
+.meter{height:3px;background:var(--surface-2);position:relative;overflow:hidden}
+.meter i{position:absolute;inset:0 auto 0 0;width:0;transition:width .12s linear}
+.jev .meter i{background:var(--jev)} .llm .meter i{background:var(--llm)}
+
+.counted{font-family:var(--mono);font-size:11px;color:var(--ink-3);padding:9px 20px;
+  border-bottom:1px solid var(--line-2);display:flex;justify-content:space-between;gap:10px;
+  font-variant-numeric:tabular-nums}
+.counted .done b{color:var(--ink);font-weight:600}
+
+.stream{height:376px;overflow-y:auto;overscroll-behavior:contain;padding:6px 0}
+.row{display:grid;grid-template-columns:1fr auto;gap:5px 14px;padding:10px 20px;
+  border-bottom:1px solid var(--line-2);align-items:baseline}
+.row:last-child{border-bottom:0}
+.row.miss{background:var(--bad-soft)}
+.row .act{font-family:var(--mono);font-size:13.5px;font-weight:600;letter-spacing:-.01em}
+.jev .row .act{color:var(--jev)} .llm .row .act{color:var(--llm)}
+.row.miss .act{color:var(--bad)}
+.row .say{grid-column:1;font-size:12px;color:var(--ink-3);line-height:1.45;
+  overflow-wrap:anywhere}
+.row .rt{grid-column:2;grid-row:1/3;text-align:right;display:flex;flex-direction:column;
+  align-items:flex-end;gap:4px}
+.vd{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.08em;
+  padding:2px 7px;border-radius:5px;background:var(--surface-2);color:var(--ink-3);
+  border:1px solid var(--line-strong);white-space:nowrap}
+.row.miss .vd{background:transparent;border-color:var(--bad);color:var(--bad)}
+.ms{font-family:var(--mono);font-size:11px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.row.miss .ms{color:var(--bad)}
+
+.pending{padding:10px 20px;display:flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-3);border-bottom:1px solid var(--line-2)}
+.dots{display:inline-flex;gap:3px}
+.dots i{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.3;
+  animation:pulse 1.05s infinite}
+.jev .dots{color:var(--jev)} .llm .dots{color:var(--llm)}
+.dots i:nth-child(2){animation-delay:.18s} .dots i:nth-child(3){animation-delay:.36s}
+@keyframes pulse{0%,100%{opacity:.25}50%{opacity:1}}
+.idle{padding:10px 20px;font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+  border-bottom:1px solid var(--line-2)}
+.finished{font-weight:600}
+.jev .finished{color:var(--jev)} .llm .finished{color:var(--llm)}
+
+.verdictbar{padding:12px 20px;border-top:1px solid var(--line);background:var(--bg);
+  font-family:var(--mono);font-size:11px;color:var(--ink-3);display:flex;gap:14px;
+  flex-wrap:wrap;font-variant-numeric:tabular-nums}
+.verdictbar b{color:var(--ink-2);font-weight:600}
+
+.result{margin-top:20px;border:1px solid var(--line);border-radius:12px;background:var(--surface);
+  box-shadow:var(--shadow);padding:20px;display:none}
+.result.on{display:block}
+.result h2{margin:0 0 16px;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.deltas{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:18px}
+.delta .k{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:6px}
+.delta .v{font-family:var(--mono);font-size:28px;font-weight:600;color:var(--jev);
+  letter-spacing:-.025em;font-variant-numeric:tabular-nums;line-height:1}
+.delta .n{font-size:12px;color:var(--ink-2);margin-top:7px;line-height:1.5}
+
+.method{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--ink-3);line-height:1.65}
+.method b{color:var(--ink-2);font-weight:600}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<div class="wrap">
+  <p class="eyebrow">Measured replay &middot; 48 routing decisions &middot; 12 tools, 8 routing rules</p>
+  <h1>What it costs to pick the right tool</h1>
+  <p class="lede">Every turn, a voice agent has to choose which tool to call next. Both lanes
+  replay the same 48 decisions at their <b>actually measured</b> latency and token cost.
+  Nothing here is simulated except the clock.</p>
+
+  <div class="controls">
+    <button id="run" type="button">Pause</button>
+    <button id="reset" type="button">Restart</button>
+    <span class="ctl-label">Speed</span>
+    <span class="seg" id="speeds"></span>
+  </div>
+
+  <div class="race">
+    <section class="lane jev" id="lane-jev">
+      <div class="lane-head">
+        <div class="engine"><span class="nm">Jev</span><span class="md">jev-1.13.0</span></div>
+        <div class="role">Decision model &middot; one Choice over 12 tools</div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="k">Per decision</div><div class="v" id="t-jev">&mdash;</div>
+          <div class="sub" id="ta-jev">0.00s elapsed</div></div>
+        <div class="stat"><div class="k">Spend</div><div class="v" id="c-jev">0.000&cent;</div>
+          <div class="sub" id="cp-jev">&mdash; per 1M</div></div>
+      </div>
+      <div class="meter"><i id="m-jev"></i></div>
+      <div class="counted"><span class="done" id="d-jev"><b>0</b> / 48 routed</span>
+        <span id="a-jev">&mdash;</span></div>
+      <div class="stream" id="s-jev"></div>
+      <div class="verdictbar" id="v-jev"></div>
+    </section>
+
+    <section class="lane llm" id="lane-llm">
+      <div class="lane-head">
+        <div class="engine"><span class="nm">LLM router</span><span class="md">gpt-4.1-mini</span></div>
+        <div class="role">Function calling &middot; full routing spec in context</div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="k">Per decision</div><div class="v" id="t-llm">&mdash;</div>
+          <div class="sub" id="ta-llm">0.00s elapsed</div></div>
+        <div class="stat"><div class="k">Spend</div><div class="v" id="c-llm">0.000&cent;</div>
+          <div class="sub" id="cp-llm">&mdash; per 1M</div></div>
+      </div>
+      <div class="meter"><i id="m-llm"></i></div>
+      <div class="counted"><span class="done" id="d-llm"><b>0</b> / 48 routed</span>
+        <span id="a-llm">&mdash;</span></div>
+      <div class="stream" id="s-llm"></div>
+      <div class="verdictbar" id="v-llm"></div>
+    </section>
+  </div>
+
+  <div class="result" id="result">
+    <h2>Across 48 tool-routing decisions</h2>
+    <div class="deltas">
+      <div class="delta"><div class="k">Wall clock</div><div class="v" id="r-speed">&mdash;</div>
+        <div class="n" id="r-speed-n"></div></div>
+      <div class="delta"><div class="k">Cost</div><div class="v" id="r-cost">&mdash;</div>
+        <div class="n" id="r-cost-n"></div></div>
+      <div class="delta"><div class="k">Per-decision p50</div><div class="v" id="r-p50">&mdash;</div>
+        <div class="n" id="r-p50-n"></div></div>
+      <div class="delta"><div class="k">Right tool</div><div class="v" id="r-acc">&mdash;</div>
+        <div class="n" id="r-acc-n"></div></div>
+    </div>
+  </div>
+
+  <p class="method"><b>Method.</b> 48 caller scenarios against a 12-tool catalog and 8 ordered
+  routing rules. Both lanes receive the same conversation, the same caller state, and the same
+  routing spec. Jev answers one Choice question over the catalog; the LLM uses function calling
+  with the spec in context. Per-decision latency and token cost were recorded live against the
+  real APIs, then replayed here on a shared clock. Latency is end-to-end API time from one US
+  machine, not model inference time. Rows tinted red picked the wrong tool.
+  <b>Caveat:</b> the same author wrote the scenarios and the correct answers, so read the
+  accuracy column as context rather than as a score. The latency and cost figures do not depend
+  on those labels.</p>
+</div>
+
+<script>window.__GUARD__={"meta":{"models":{"jev":"jev-1.13.0","llm":"gpt-4.1-mini"},"n":48},"items":[{"id":"STR-01","cat":"straightforward","truth":"get_account_summary","say":"What's my current balance and what plan am I on?","arms":{"jev":{"v":"get_account_summary","ms":278,"c":7.686000000000002e-05},"llm":{"v":"get_account_summary","ms":913,"c":0.00036}}},{"id":"STR-02","cat":"straightforward","truth":"change_plan","say":"Can you upgrade me to the premium plan?","arms":{"jev":{"v":"change_plan","ms":260,"c":7.6566e-05},"llm":{"v":"change_plan","ms":997,"c":0.000356}}},{"id":"STR-03","cat":"straightforward","truth":"check_outage_status","say":"Is there an outage at 400 Oak Street? My neighbour says there is.","arms":{"jev":{"v":"check_outage_status","ms":254,"c":7.744800000000001e-05},"llm":{"v":"check_outage_status","ms":959,"c":0.00037160000000000003}}},{"id":"STR-04","cat":"straightforward","truth":"get_billing_history","say":"I'd like to see my invoices from the last three months.","arms":{"jev":{"v":"get_billing_history","ms":270,"c":7.7238e-05},"llm":{"v":"get_billing_history","ms":900,"c":0.00036040000000000003}}},{"id":"STR-05","cat":"straightforward","truth":"transfer_to_human","say":"Put me through to a supervisor please.","arms":{"jev":{"v":"transfer_to_human","ms":255,"c":7.686000000000002e-05},"llm":{"v":"transfer_to_human","ms":944,"c":0.00035720000000000006}}},{"id":"STR-06","cat":"straightforward","truth":"cancel_service","say":"I want to cancel my service effective the end of the month.","arms":{"jev":{"v":"cancel_service","ms":257,"c":7.673400000000001e-05},"llm":{"v":"cancel_service","ms":849,"c":0.0003464}}},{"id":"STR-07","cat":"straightforward","truth":"get_account_summary","say":"What plan am I on and what am I paying for it?","arms":{"jev":{"v":"get_account_summary","ms":297,"c":7.690200000000002e-05},"llm":{"v":"get_account_summary","ms":971,"c":0.0003656}}},{"id":"STR-08","cat":"straightforward","truth":"check_outage_status","say":"My internet has been dropping out all morning.","arms":{"jev":{"v":"check_outage_status","ms":280,"c":7.706999999999999e-05},"llm":{"v":"check_outage_status","ms":1066,"c":0.0003656}}},{"id":"AUT-01","cat":"auth_first","truth":"authenticate_customer","say":"What's my balance?","arms":{"jev":{"v":"authenticate_customer","ms":264,"c":7.6398e-05},"llm":{"v":"authenticate_customer","ms":694,"c":0.00034760000000000005}}},{"id":"AUT-02","cat":"auth_first","truth":"authenticate_customer","say":"Downgrade me to the basic plan please.","arms":{"jev":{"v":"authenticate_customer","ms":220,"c":7.660800000000001e-05},"llm":{"v":"authenticate_customer","ms":663,"c":0.00035480000000000006}}},{"id":"AUT-03","cat":"auth_first","truth":"authenticate_customer","say":"I want to cancel.","arms":{"jev":{"v":"cancel_service","ms":245,"c":7.6398e-05},"llm":{"v":"authenticate_customer","ms":624,"c":0.00035280000000000006}}},{"id":"AUT-04","cat":"auth_first","truth":"authenticate_customer","say":"There's a charge on my bill I don't recognize.","arms":{"jev":{"v":"authenticate_customer","ms":217,"c":7.6692e-05},"llm":{"v":"authenticate_customer","ms":696,"c":0.0003596}}},{"id":"AUT-05","cat":"auth_first","truth":"authenticate_customer","say":"My line's been noisy for a week, can you test it?","arms":{"jev":{"v":"check_outage_status","ms":234,"c":7.728e-05},"llm":{"v":"authenticate_customer","ms":1167,"c":0.000358}}},{"id":"AUT-06","cat":"auth_first","truth":"authenticate_customer","say":"Send someone out to fix the box outside my house.","arms":{"jev":{"v":"authenticate_customer","ms":233,"c":7.665e-05},"llm":{"v":"authenticate_customer","ms":639,"c":0.00035840000000000004}}},{"id":"AUT-07","cat":"auth_first","truth":"report_fraud","say":"Someone's been using my account, I need help now.","arms":{"jev":{"v":"report_fraud","ms":243,"c":7.686000000000002e-05},"llm":{"v":"report_fraud","ms":603,"c":0.00035400000000000004}}},{"id":"AUT-08","cat":"auth_first","truth":"transfer_to_human","say":"Just get me a human, I'm not doing the verification thing.","arms":{"jev":{"v":"transfer_to_human","ms":231,"c":7.711199999999999e-05},"llm":{"v":"transfer_to_human","ms":630,"c":0.000364}}},{"id":"KEY-01","cat":"keyword_trap","truth":"get_billing_history","say":"There's a forty dollar charge here I don't recognize at all.","arms":{"jev":{"v":"get_billing_history","ms":170,"c":7.728e-05},"llm":{"v":"get_billing_history","ms":730,"c":0.00037320000000000007}}},{"id":"KEY-02","cat":"keyword_trap","truth":"dispute_charge","say":"I want to dispute this. The thirty dollar late fee from March 3rd.","arms":{"jev":{"v":"dispute_charge","ms":201,"c":7.7868e-05},"llm":{"v":"dispute_charge","ms":675,"c":0.0003796}}},{"id":"KEY-03","cat":"keyword_trap","truth":"get_billing_history","say":"Refund me for last month.","arms":{"jev":{"v":"get_billing_history","ms":256,"c":7.6986e-05},"llm":{"v":"issue_refund","ms":620,"c":0.0003484}}},{"id":"KEY-04","cat":"keyword_trap","truth":"issue_refund","say":"You already agreed the sixty dollar charge was a mistake, so send the money back.","arms":{"jev":{"v":"issue_refund","ms":167,"c":7.8036e-05},"llm":{"v":"issue_refund","ms":703,"c":0.00037920000000000006}}},{"id":"KEY-05","cat":"keyword_trap","truth":"check_outage_status","say":"I'm going to cancel if this keeps happening.","arms":{"jev":{"v":"check_outage_status","ms":174,"c":7.711199999999999e-05},"llm":{"v":"schedule_technician","ms":696,"c":0.000372}}},{"id":"KEY-06","cat":"keyword_trap","truth":"get_account_summary","say":"Your competitor is offering half this price. This is ridiculous.","arms":{"jev":{"v":"get_account_summary","ms":181,"c":7.686000000000002e-05},"llm":{"v":"change_plan","ms":590,"c":0.00035240000000000005}}},{"id":"KEY-07","cat":"keyword_trap","truth":"check_outage_status","say":"Send a technician out, my connection is terrible.","arms":{"jev":{"v":"check_outage_status","ms":199,"c":7.711199999999999e-05},"llm":{"v":"check_outage_status","ms":710,"c":0.00037080000000000007}}},{"id":"KEY-08","cat":"keyword_trap","truth":"check_outage_status","say":"Run a diagnostic on my line.","arms":{"jev":{"v":"check_outage_status","ms":197,"c":7.6986e-05},"llm":{"v":"check_outage_status","ms":582,"c":0.0003488000000000001}}},{"id":"KEY-09","cat":"keyword_trap","truth":"transfer_to_human","say":"My bill is wrong and I want to speak to someone about it.","arms":{"jev":{"v":"transfer_to_human","ms":162,"c":7.711199999999999e-05},"llm":{"v":"transfer_to_human","ms":622,"c":0.00036760000000000004}}},{"id":"KEY-10","cat":"keyword_trap","truth":"report_fraud","say":"Someone charged four hundred dollars to my account and it wasn't me.","arms":{"jev":{"v":"report_fraud","ms":230,"c":7.6944e-05},"llm":{"v":"report_fraud","ms":589,"c":0.0003608}}},{"id":"SEQ-01","cat":"sequencing","truth":"run_line_diagnostics","say":"Still dropping out. You already checked for outages, right?","arms":{"jev":{"v":"run_line_diagnostics","ms":195,"c":7.8036e-05},"llm":{"v":"run_line_diagnostics","ms":679,"c":0.0003788}}},{"id":"SEQ-02","cat":"sequencing","truth":"schedule_technician","say":"The diagnostic didn't find anything but it's still broken.","arms":{"jev":{"v":"schedule_technician","ms":194,"c":7.761600000000001e-05},"llm":{"v":"schedule_technician","ms":596,"c":0.00036960000000000004}}},{"id":"SEQ-03","cat":"sequencing","truth":"check_outage_status","say":"My service is out.","arms":{"jev":{"v":"check_outage_status","ms":249,"c":7.6902e-05},"llm":{"v":"check_outage_status","ms":841,"c":0.00037040000000000006}}},{"id":"SEQ-04","cat":"sequencing","truth":"check_outage_status","say":"You said there's an outage. When will it be fixed?","arms":{"jev":{"v":"check_outage_status","ms":160,"c":7.7238e-05},"llm":{"v":"run_line_diagnostics","ms":836,"c":0.00037160000000000003}}},{"id":"SEQ-05","cat":"sequencing","truth":"transfer_to_human","say":"Okay the technician visit didn't help either.","arms":{"jev":{"v":"schedule_technician","ms":268,"c":7.744800000000001e-05},"llm":{"v":"schedule_technician","ms":734,"c":0.00037119999999999997}}},{"id":"SEQ-06","cat":"sequencing","truth":"dispute_charge","say":"I've shown you the charge, now actually do something about it.","arms":{"jev":{"v":"dispute_charge","ms":197,"c":7.782600000000001e-05},"llm":{"v":"dispute_charge","ms":692,"c":0.00038200000000000007}}},{"id":"FRD-01","cat":"fraud","truth":"report_fraud","say":"There are three charges from a city I've never been to.","arms":{"jev":{"v":"report_fraud","ms":170,"c":7.690200000000002e-05},"llm":{"v":"report_fraud","ms":568,"c":0.00035240000000000005}}},{"id":"FRD-02","cat":"fraud","truth":"report_fraud","say":"I got an email saying a new device was added to my account. I didn't add one.","arms":{"jev":{"v":"report_fraud","ms":172,"c":7.7196e-05},"llm":{"v":"report_fraud","ms":668,"c":0.00037119999999999997}}},{"id":"FRD-03","cat":"fraud","truth":"get_billing_history","say":"My teenage son is on my family plan and he added a data pack without asking me. Can you rever...","arms":{"jev":{"v":"get_billing_history","ms":227,"c":7.765800000000001e-05},"llm":{"v":"get_billing_history","ms":785,"c":0.0003888}}},{"id":"FRD-04","cat":"fraud","truth":"report_fraud","say":"Someone called pretending to be you and got my password. What do I do?","arms":{"jev":{"v":"report_fraud","ms":221,"c":7.702800000000001e-05},"llm":{"v":"report_fraud","ms":645,"c":0.000362}}},{"id":"FRD-05","cat":"fraud","truth":"get_billing_history","say":"This roaming charge is way higher than I expected.","arms":{"jev":{"v":"get_billing_history","ms":184,"c":7.711199999999999e-05},"llm":{"v":"get_billing_history","ms":736,"c":0.00037240000000000005}}},{"id":"FRD-06","cat":"fraud","truth":"report_fraud","say":"My account was locked and I never locked it.","arms":{"jev":{"v":"report_fraud","ms":210,"c":7.677600000000001e-05},"llm":{"v":"report_fraud","ms":543,"c":0.0003596}}},{"id":"SWI-01","cat":"intent_switch","truth":"get_account_summary","say":"I want to cancel my service. Actually, hold on, first can you tell me what I'm currently paying?","arms":{"jev":{"v":"get_account_summary","ms":200,"c":7.7322e-05},"llm":{"v":"get_account_summary","ms":819,"c":0.0003644}}},{"id":"SWI-02","cat":"intent_switch","truth":"transfer_to_human","say":"My internet is slow. Oh, and before that, is there a supervisor available?","arms":{"jev":{"v":"transfer_to_human","ms":187,"c":7.7238e-05},"llm":{"v":"transfer_to_human","ms":588,"c":0.00036400000000000007}}},{"id":"SWI-03","cat":"intent_switch","truth":"check_outage_status","say":"Can you check my last bill? No wait, the internet thing is more urgent, it's completely dead.","arms":{"jev":{"v":"check_outage_status","ms":160,"c":7.7616e-05},"llm":{"v":"check_outage_status","ms":671,"c":0.00037520000000000007}}},{"id":"SWI-04","cat":"intent_switch","truth":"get_billing_history","say":"Upgrade my plan. Sorry, scratch that, I actually want to see last month's invoice first.","arms":{"jev":{"v":"get_billing_history","ms":232,"c":7.753200000000002e-05},"llm":{"v":"get_billing_history","ms":733,"c":0.0003776}}},{"id":"SWI-05","cat":"intent_switch","truth":"check_outage_status","say":"I need a technician. Although honestly, is there even an outage in my area right now?","arms":{"jev":{"v":"check_outage_status","ms":171,"c":7.749e-05},"llm":{"v":"check_outage_status","ms":597,"c":0.00037119999999999997}}},{"id":"SWI-06","cat":"intent_switch","truth":"change_plan","say":"Cancel everything. Actually no, tell me what it would cost to downgrade instead.","arms":{"jev":{"v":"change_plan","ms":195,"c":7.686000000000002e-05},"llm":{"v":"change_plan","ms":676,"c":0.0003748}}},{"id":"ESC-01","cat":"escalation","truth":"transfer_to_human","say":"This is the fourth time I've called about this. Get me someone who can actually fix it.","arms":{"jev":{"v":"transfer_to_human","ms":166,"c":7.7364e-05},"llm":{"v":"transfer_to_human","ms":750,"c":0.000368}}},{"id":"ESC-02","cat":"escalation","truth":"check_outage_status","say":"I don't even know what I need, I just know nothing works.","arms":{"jev":{"v":"check_outage_status","ms":154,"c":7.7322e-05},"llm":{"v":"check_outage_status","ms":768,"c":0.000382}}},{"id":"ESC-03","cat":"escalation","truth":"transfer_to_human","say":"Do you sell home insurance?","arms":{"jev":{"v":"transfer_to_human","ms":235,"c":7.677600000000001e-05},"llm":{"v":"transfer_to_human","ms":626,"c":0.000374}}},{"id":"ESC-04","cat":"escalation","truth":"transfer_to_human","say":"Manager. Now.","arms":{"jev":{"v":"transfer_to_human","ms":246,"c":7.6692e-05},"llm":{"v":"transfer_to_human","ms":624,"c":0.0003556}}}]};</script>
+<script>
+(function(){
+  var DATA = window.__GUARD__, ITEMS = DATA.items, MODELS = DATA.meta.models;
+  var N = ITEMS.length;
+  var SPEEDS = [1,2,5,10];
+  var speed = 5, playing = true, raf = null, last = 0, clock = 0;
+  var reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+  function cum(arm){ var t=0; return ITEMS.map(function(it){ t += it.arms[arm].ms; return t; }); }
+  var lanes = {};
+  function build(){
+    lanes = {
+      jev: {arm:"jev", at:cum("jev"), i:0, ms:0, cost:0, ok:0, tally:{}},
+      llm: {arm:"llm", at:cum("llm"), i:0, ms:0, cost:0, ok:0, tally:{}}
+    };
+  }
+
+  var $ = function(id){ return document.getElementById(id); };
+  var fmtT = function(ms){ return (ms/1000).toFixed(2)+"s"; };
+  var fmtC = function(u){ return (u*100).toFixed(3)+"¢"; };
+
+  function money(v){
+    if (v >= 1000) return "$"+Math.round(v).toLocaleString();
+    if (v >= 10)   return "$"+v.toFixed(0);
+    return "$"+v.toFixed(2);
+  }
+
+  function reset(){
+    build(); clock = 0; last = 0;
+    ["jev","llm"].forEach(function(k){
+      $("s-"+k).innerHTML = "";
+      $("t-"+k).innerHTML = "&mdash;"; $("c-"+k).textContent = "0.000¢";
+      $("ta-"+k).textContent = "0.00s elapsed"; $("cp-"+k).innerHTML = "&mdash; per 1M";
+      $("m-"+k).style.width = "0%";
+      $("d-"+k).innerHTML = "<b>0</b> / "+N+" routed";
+      $("a-"+k).innerHTML = "&mdash;"; $("v-"+k).textContent = "";
+    });
+    $("result").classList.remove("on");
+  }
+
+  function rowEl(it, a, miss){
+    var d = document.createElement("div");
+    d.className = "row" + (miss ? " miss" : "");
+    d.innerHTML = '<div class="act"></div><div class="rt">'
+      + '<span class="vd"></span><span class="ms"></span></div>'
+      + '<div class="say"></div>';
+    d.querySelector(".act").textContent = a.v;
+    d.querySelector(".vd").textContent = it.cat.replace(/_/g," ");
+    d.querySelector(".ms").textContent = a.ms + "ms";
+    d.querySelector(".say").textContent = "“" + it.say + "”";
+    return d;
+  }
+
+  function paint(k){
+    var L = lanes[k], done = L.i, stream = $("s-"+k);
+    $("ta-"+k).textContent = fmtT(Math.min(clock, L.at[N-1])) + " elapsed";
+    $("c-"+k).textContent = fmtC(L.cost);
+    $("m-"+k).style.width = (100*done/N) + "%";
+    $("d-"+k).innerHTML = "<b>"+done+"</b> / "+N+" routed";
+    if (done) {
+      $("t-"+k).textContent = Math.round(L.ms/done) + " ms";
+      $("cp-"+k).textContent = money(L.cost/done*1e6) + " per 1M";
+      $("a-"+k).textContent = L.ok + " of " + done + " correct";
+    }
+    var tail = stream.querySelector(".pending, .idle");
+    if (tail) tail.remove();
+    var note = document.createElement("div");
+    if (done >= N) {
+      note.className = "idle";
+      var other = lanes[k === "jev" ? "llm" : "jev"];
+      var wait = (other.at[N-1] - L.at[N-1]) / 1000;
+      note.innerHTML = '<span class="finished">Queue clear at ' + fmtT(L.at[N-1]) + '</span>'
+        + (wait > 0 ? " &middot; " + wait.toFixed(1) + "s ahead" : "");
+    } else {
+      note.className = "pending";
+      var q = ITEMS[done].say; if (q.length > 54) q = q.slice(0,51) + "\u2026";
+      note.innerHTML = '<span class="dots"><i></i><i></i><i></i></span><span>routing '
+        + ITEMS[done].id + " \u2014 \u201C" + q + "\u201D</span>";
+    }
+    stream.appendChild(note);
+    stream.scrollTop = stream.scrollHeight;
+
+    var t = L.tally, names = Object.keys(t).sort(function(a,b){return t[b]-t[a];}).slice(0,4);
+    $("v-"+k).innerHTML = names.map(function(n){
+      return n.replace(/_/g," ")+" <b>"+t[n]+"</b>"; }).join(" &middot; ") || "&nbsp;";
+  }
+
+  function advance(k){
+    var L = lanes[k], moved = false;
+    while (L.i < N && L.at[L.i] <= clock) {
+      var it = ITEMS[L.i], a = it.arms[L.arm], miss = a.v !== it.truth;
+      L.ms += a.ms; L.cost += a.c; if (!miss) L.ok++;
+      L.tally[a.v] = (L.tally[a.v]||0) + 1;
+      var stream = $("s-"+k), tail = stream.querySelector(".pending, .idle");
+      stream.insertBefore(rowEl(it, a, miss), tail);
+      L.i++; moved = true;
+      if (stream.children.length > 160) stream.removeChild(stream.firstChild);
+    }
+    return moved;
+  }
+
+  function p50(arm){
+    var v = ITEMS.map(function(i){ return i.arms[arm].ms; }).sort(function(a,b){return a-b;});
+    return v[Math.floor(v.length/2)];
+  }
+
+  function finish(){
+    var J = lanes.jev, L = lanes.llm;
+    var jt = J.at[N-1], lt = L.at[N-1];
+    $("r-speed").textContent = (lt/jt).toFixed(1) + "×";
+    $("r-speed-n").textContent = "Jev cleared the queue in " + fmtT(jt) + ". "
+      + MODELS.llm + " took " + fmtT(lt) + ".";
+    $("r-cost").textContent = (L.cost/J.cost).toFixed(0) + "×";
+    $("r-cost-n").textContent = money(J.cost/N*1e6) + " vs " + money(L.cost/N*1e6)
+      + " per million routing decisions.";
+    var pj = p50("jev"), pl = p50("llm");
+    $("r-p50").textContent = pj + " / " + pl + "ms";
+    $("r-p50-n").textContent = "A router at " + pj
+      + "ms fits inside the pause the pipeline already has. One at " + pl + "ms does not.";
+    $("r-acc").textContent = J.ok + " vs " + L.ok;
+    $("r-acc-n").textContent = "Out of " + N
+      + ". Latency only counts if the routing is comparably good.";
+    $("result").classList.add("on");
+  }
+
+  function tick(ts){
+    if (!last) last = ts;
+    var dt = Math.min(ts - last, 120); last = ts;
+    if (playing) {
+      clock += dt * speed;
+      advance("jev"); advance("llm");
+      paint("jev"); paint("llm");
+      if (lanes.jev.i >= N && lanes.llm.i >= N) {
+        playing = false; $("run").textContent = "Replay";
+        finish(); raf = null; return;
+      }
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  function start(){
+    if (raf) cancelAnimationFrame(raf);
+    last = 0; raf = requestAnimationFrame(tick);
+  }
+
+  function jumpToEnd(){
+    clock = Math.max(lanes.jev.at[N-1], lanes.llm.at[N-1]);
+    advance("jev"); advance("llm"); paint("jev"); paint("llm");
+    playing = false; $("run").textContent = "Replay"; finish();
+  }
+
+  // controls
+  var seg = $("speeds");
+  SPEEDS.forEach(function(s){
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = s + "×";
+    b.setAttribute("aria-pressed", String(s === speed));
+    b.onclick = function(){
+      speed = s;
+      [].forEach.call(seg.children, function(c){
+        c.setAttribute("aria-pressed", String(c === b)); });
+    };
+    seg.appendChild(b);
+  });
+  $("run").onclick = function(){
+    if (lanes.jev.i >= N && lanes.llm.i >= N) {
+      reset(); playing = true; this.textContent = "Pause"; start(); return;
+    }
+    playing = !playing; this.textContent = playing ? "Pause" : "Resume";
+    if (playing) start();
+  };
+  $("reset").onclick = function(){
+    reset(); playing = true; $("run").textContent = "Pause";
+    reduce ? jumpToEnd() : start();
+  };
+
+  reset();
+  if (reduce) { jumpToEnd(); } else { start(); }
+})();
+
+</script>

@@ -1,0 +1,434 @@
+[
+ {
+  "id": "STR-01",
+  "cat": "straightforward",
+  "label": "get_account_summary",
+  "tool": "change_plan",
+  "ms": 0.22862502373754978,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "STR-02",
+  "cat": "straightforward",
+  "label": "change_plan",
+  "tool": "change_plan",
+  "ms": 0.008874980267137289,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "STR-03",
+  "cat": "straightforward",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 0.005791021976619959,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "STR-04",
+  "cat": "straightforward",
+  "label": "get_billing_history",
+  "tool": "get_billing_history",
+  "ms": 0.006999995093792677,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "STR-05",
+  "cat": "straightforward",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 0.0015829573385417461,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "STR-06",
+  "cat": "straightforward",
+  "label": "cancel_service",
+  "tool": "cancel_service",
+  "ms": 0.004084024112671614,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "STR-07",
+  "cat": "straightforward",
+  "label": "get_account_summary",
+  "tool": "change_plan",
+  "ms": 0.005332985892891884,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "STR-08",
+  "cat": "straightforward",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 0.005832989700138569,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "AUT-01",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "get_account_summary",
+  "ms": 0.035582983400672674,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "AUT-02",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "check_outage_status",
+  "ms": 0.0037080026231706142,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "AUT-03",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "cancel_service",
+  "ms": 0.0019170111045241356,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "AUT-04",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "get_billing_history",
+  "ms": 0.004458997864276171,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "AUT-05",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "check_outage_status",
+  "ms": 0.004500034265220165,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "AUT-06",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "schedule_technician",
+  "ms": 0.00404199818149209,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "AUT-07",
+  "cat": "auth_first",
+  "label": "report_fraud",
+  "tool": "get_account_summary",
+  "ms": 0.005542009603232145,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "AUT-08",
+  "cat": "auth_first",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 0.00400003045797348,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "KEY-01",
+  "cat": "keyword_trap",
+  "label": "get_billing_history",
+  "tool": "get_billing_history",
+  "ms": 0.0035829725675284863,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "KEY-02",
+  "cat": "keyword_trap",
+  "label": "dispute_charge",
+  "tool": "dispute_charge",
+  "ms": 0.004250032361596823,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "KEY-03",
+  "cat": "keyword_trap",
+  "label": "get_billing_history",
+  "tool": "issue_refund",
+  "ms": 0.002416956704109907,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "KEY-04",
+  "cat": "keyword_trap",
+  "label": "issue_refund",
+  "tool": "issue_refund",
+  "ms": 0.004250032361596823,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "KEY-05",
+  "cat": "keyword_trap",
+  "label": "check_outage_status",
+  "tool": "cancel_service",
+  "ms": 0.0027919886633753777,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "KEY-06",
+  "cat": "keyword_trap",
+  "label": "get_account_summary",
+  "tool": "transfer_to_human",
+  "ms": 0.008209026418626308,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "KEY-07",
+  "cat": "keyword_trap",
+  "label": "check_outage_status",
+  "tool": "schedule_technician",
+  "ms": 0.004959001671522856,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "KEY-08",
+  "cat": "keyword_trap",
+  "label": "check_outage_status",
+  "tool": "run_line_diagnostics",
+  "ms": 0.003500026650726795,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "KEY-09",
+  "cat": "keyword_trap",
+  "label": "transfer_to_human",
+  "tool": "get_billing_history",
+  "ms": 0.003541994374245405,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "KEY-10",
+  "cat": "keyword_trap",
+  "label": "report_fraud",
+  "tool": "report_fraud",
+  "ms": 0.0021669548004865646,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "SEQ-01",
+  "cat": "sequencing",
+  "label": "run_line_diagnostics",
+  "tool": "check_outage_status",
+  "ms": 0.00562501372769475,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "SEQ-02",
+  "cat": "sequencing",
+  "label": "schedule_technician",
+  "tool": "run_line_diagnostics",
+  "ms": 0.004292000085115433,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "SEQ-03",
+  "cat": "sequencing",
+  "label": "check_outage_status",
+  "tool": "transfer_to_human",
+  "ms": 0.004208995960652828,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "SEQ-04",
+  "cat": "sequencing",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 0.005292007699608803,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "SEQ-05",
+  "cat": "sequencing",
+  "label": "transfer_to_human",
+  "tool": "schedule_technician",
+  "ms": 0.004125002305954695,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "SEQ-06",
+  "cat": "sequencing",
+  "label": "dispute_charge",
+  "tool": "get_billing_history",
+  "ms": 0.003541994374245405,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "FRD-01",
+  "cat": "fraud",
+  "label": "report_fraud",
+  "tool": "get_billing_history",
+  "ms": 0.0032919924706220627,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "FRD-02",
+  "cat": "fraud",
+  "label": "report_fraud",
+  "tool": "get_account_summary",
+  "ms": 0.008041039109230042,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "FRD-03",
+  "cat": "fraud",
+  "label": "get_billing_history",
+  "tool": "change_plan",
+  "ms": 0.0074160052463412285,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "FRD-04",
+  "cat": "fraud",
+  "label": "report_fraud",
+  "tool": "transfer_to_human",
+  "ms": 0.007834052667021751,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "FRD-05",
+  "cat": "fraud",
+  "label": "get_billing_history",
+  "tool": "get_billing_history",
+  "ms": 0.0034170225262641907,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "FRD-06",
+  "cat": "fraud",
+  "label": "report_fraud",
+  "tool": "get_account_summary",
+  "ms": 0.006582995411008596,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "SWI-01",
+  "cat": "intent_switch",
+  "label": "get_account_summary",
+  "tool": "cancel_service",
+  "ms": 0.002667016815394163,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "SWI-02",
+  "cat": "intent_switch",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 0.0016669509932398796,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "SWI-03",
+  "cat": "intent_switch",
+  "label": "check_outage_status",
+  "tool": "get_billing_history",
+  "ms": 0.0037499703466892242,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "SWI-04",
+  "cat": "intent_switch",
+  "label": "get_billing_history",
+  "tool": "get_billing_history",
+  "ms": 0.004500034265220165,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "SWI-05",
+  "cat": "intent_switch",
+  "label": "check_outage_status",
+  "tool": "schedule_technician",
+  "ms": 0.004292000085115433,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "SWI-06",
+  "cat": "intent_switch",
+  "label": "change_plan",
+  "tool": "cancel_service",
+  "ms": 0.0022500171326100826,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "ESC-01",
+  "cat": "escalation",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 0.007792026735842228,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "ESC-02",
+  "cat": "escalation",
+  "label": "check_outage_status",
+  "tool": "transfer_to_human",
+  "ms": 0.006040965672582388,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "ESC-03",
+  "cat": "escalation",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 0.004417030140757561,
+  "cost": 0.0,
+  "sem": {}
+ },
+ {
+  "id": "ESC-04",
+  "cat": "escalation",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 0.0007090275175869465,
+  "cost": 0.0,
+  "sem": {}
+ }
+]

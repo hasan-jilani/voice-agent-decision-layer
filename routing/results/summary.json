@@ -1,0 +1,56 @@
+[
+ {
+  "arm": "jev_whole",
+  "acc": 93.8,
+  "n": 48,
+  "p50": 220,
+  "p90": 268,
+  "cost1k": 0.077,
+  "err": 0,
+  "bycat": {
+   "auth_first": 75,
+   "escalation": 100,
+   "fraud": 100,
+   "intent_switch": 100,
+   "keyword_trap": 100,
+   "sequencing": 83,
+   "straightforward": 100
+  }
+ },
+ {
+  "arm": "llm_whole",
+  "acc": 89.6,
+  "n": 48,
+  "p50": 694,
+  "p90": 959,
+  "cost1k": 0.365,
+  "err": 0,
+  "bycat": {
+   "auth_first": 100,
+   "escalation": 100,
+   "fraud": 100,
+   "intent_switch": 100,
+   "keyword_trap": 70,
+   "sequencing": 67,
+   "straightforward": 100
+  }
+ },
+ {
+  "arm": "jev_decomposed",
+  "acc": 87.5,
+  "n": 48,
+  "p50": 204,
+  "p90": 265,
+  "cost1k": 0.065,
+  "err": 0,
+  "bycat": {
+   "auth_first": 100,
+   "escalation": 100,
+   "fraud": 67,
+   "intent_switch": 100,
+   "keyword_trap": 80,
+   "sequencing": 67,
+   "straightforward": 100
+  }
+ }
+]

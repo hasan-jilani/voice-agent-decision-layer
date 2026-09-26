@@ -1,0 +1,818 @@
+[
+ {
+  "id": "STR-01",
+  "cat": "straightforward",
+  "label": "get_account_summary",
+  "tool": "get_account_summary",
+  "ms": 191.80966599378735,
+  "cost": 6.5226e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.03,
+   "needs_account_data": 0.96,
+   "charge_identified": 0.03,
+   "error_established": 0.02,
+   "service_problem": 0.04,
+   "intends_to_cancel": 0.04
+  }
+ },
+ {
+  "id": "STR-02",
+  "cat": "straightforward",
+  "label": "change_plan",
+  "tool": "change_plan",
+  "ms": 268.11174995964393,
+  "cost": 6.510000000000001e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.04,
+   "needs_account_data": 0.94,
+   "charge_identified": 0.05,
+   "error_established": 0.02,
+   "service_problem": 0.04,
+   "intends_to_cancel": 0.03
+  }
+ },
+ {
+  "id": "STR-03",
+  "cat": "straightforward",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 260.5324590113014,
+  "cost": 6.547800000000001e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.09,
+   "needs_account_data": 0.47,
+   "charge_identified": 0.08,
+   "error_established": 0.02,
+   "service_problem": 0.37,
+   "intends_to_cancel": 0.03
+  }
+ },
+ {
+  "id": "STR-04",
+  "cat": "straightforward",
+  "label": "get_billing_history",
+  "tool": "get_billing_history",
+  "ms": 213.5558330337517,
+  "cost": 6.5268e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.03,
+   "needs_account_data": 0.94,
+   "charge_identified": 0.03,
+   "error_established": 0.02,
+   "service_problem": 0.03,
+   "intends_to_cancel": 0.03
+  }
+ },
+ {
+  "id": "STR-05",
+  "cat": "straightforward",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 204.55324999056756,
+  "cost": 6.489000000000001e-05,
+  "sem": {
+   "requests_human": 0.98,
+   "unauthorized_access": 0.06,
+   "needs_account_data": 0.41,
+   "charge_identified": 0.04,
+   "error_established": 0.03,
+   "service_problem": 0.21,
+   "intends_to_cancel": 0.05
+  }
+ },
+ {
+  "id": "STR-06",
+  "cat": "straightforward",
+  "label": "cancel_service",
+  "tool": "cancel_service",
+  "ms": 267.3498750082217,
+  "cost": 6.560400000000002e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.03,
+   "needs_account_data": 0.92,
+   "charge_identified": 0.04,
+   "error_established": 0.02,
+   "service_problem": 0.04,
+   "intends_to_cancel": 0.92
+  }
+ },
+ {
+  "id": "STR-07",
+  "cat": "straightforward",
+  "label": "get_account_summary",
+  "tool": "get_account_summary",
+  "ms": 191.276540979743,
+  "cost": 6.5268e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.05,
+   "needs_account_data": 0.95,
+   "charge_identified": 0.05,
+   "error_established": 0.03,
+   "service_problem": 0.06,
+   "intends_to_cancel": 0.04
+  }
+ },
+ {
+  "id": "STR-08",
+  "cat": "straightforward",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 204.05208301963285,
+  "cost": 6.510000000000001e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.03,
+   "needs_account_data": 0.82,
+   "charge_identified": 0.05,
+   "error_established": 0.02,
+   "service_problem": 0.98,
+   "intends_to_cancel": 0.04
+  }
+ },
+ {
+  "id": "AUT-01",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "authenticate_customer",
+  "ms": 279.2912920122035,
+  "cost": 6.493200000000001e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.07,
+   "needs_account_data": 0.93,
+   "charge_identified": 0.03,
+   "error_established": 0.02,
+   "service_problem": 0.04,
+   "intends_to_cancel": 0.03
+  }
+ },
+ {
+  "id": "AUT-02",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "authenticate_customer",
+  "ms": 264.9666669894941,
+  "cost": 6.514200000000001e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.09,
+   "needs_account_data": 0.94,
+   "charge_identified": 0.05,
+   "error_established": 0.02,
+   "service_problem": 0.05,
+   "intends_to_cancel": 0.41
+  }
+ },
+ {
+  "id": "AUT-03",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "authenticate_customer",
+  "ms": 277.0979590131901,
+  "cost": 6.5268e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.07,
+   "needs_account_data": 0.89,
+   "charge_identified": 0.04,
+   "error_established": 0.03,
+   "service_problem": 0.06,
+   "intends_to_cancel": 0.91
+  }
+ },
+ {
+  "id": "AUT-04",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "authenticate_customer",
+  "ms": 208.67629098938778,
+  "cost": 6.5226e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.16,
+   "needs_account_data": 0.92,
+   "charge_identified": 0.1,
+   "error_established": 0.03,
+   "service_problem": 0.05,
+   "intends_to_cancel": 0.05
+  }
+ },
+ {
+  "id": "AUT-05",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "authenticate_customer",
+  "ms": 172.05987498164177,
+  "cost": 6.531e-05,
+  "sem": {
+   "requests_human": 0.04,
+   "unauthorized_access": 0.06,
+   "needs_account_data": 0.85,
+   "charge_identified": 0.05,
+   "error_established": 0.02,
+   "service_problem": 0.96,
+   "intends_to_cancel": 0.03
+  }
+ },
+ {
+  "id": "AUT-06",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "authenticate_customer",
+  "ms": 217.05575002124533,
+  "cost": 6.518399999999999e-05,
+  "sem": {
+   "requests_human": 0.08,
+   "unauthorized_access": 0.21,
+   "needs_account_data": 0.86,
+   "charge_identified": 0.05,
+   "error_established": 0.02,
+   "service_problem": 0.85,
+   "intends_to_cancel": 0.05
+  }
+ },
+ {
+  "id": "AUT-07",
+  "cat": "auth_first",
+  "label": "report_fraud",
+  "tool": "report_fraud",
+  "ms": 234.8204999580048,
+  "cost": 6.5226e-05,
+  "sem": {
+   "requests_human": 0.05,
+   "unauthorized_access": 0.92,
+   "needs_account_data": 0.9,
+   "charge_identified": 0.04,
+   "error_established": 0.02,
+   "service_problem": 0.2,
+   "intends_to_cancel": 0.04
+  }
+ },
+ {
+  "id": "AUT-08",
+  "cat": "auth_first",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 227.34433301957324,
+  "cost": 6.514200000000001e-05,
+  "sem": {
+   "requests_human": 0.97,
+   "unauthorized_access": 0.15,
+   "needs_account_data": 0.42,
+   "charge_identified": 0.04,
+   "error_established": 0.02,
+   "service_problem": 0.13,
+   "intends_to_cancel": 0.11
+  }
+ },
+ {
+  "id": "KEY-01",
+  "cat": "keyword_trap",
+  "label": "get_billing_history",
+  "tool": "dispute_charge",
+  "ms": 164.61854195222259,
+  "cost": 6.531e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.34,
+   "needs_account_data": 0.91,
+   "charge_identified": 0.9,
+   "error_established": 0.04,
+   "service_problem": 0.04,
+   "intends_to_cancel": 0.05
+  }
+ },
+ {
+  "id": "KEY-02",
+  "cat": "keyword_trap",
+  "label": "dispute_charge",
+  "tool": "dispute_charge",
+  "ms": 233.66979201091453,
+  "cost": 6.6234e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.03,
+   "needs_account_data": 0.89,
+   "charge_identified": 0.98,
+   "error_established": 0.04,
+   "service_problem": 0.03,
+   "intends_to_cancel": 0.06
+  }
+ },
+ {
+  "id": "KEY-03",
+  "cat": "keyword_trap",
+  "label": "get_billing_history",
+  "tool": "get_billing_history",
+  "ms": 188.31012502778322,
+  "cost": 6.5016e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.05,
+   "needs_account_data": 0.92,
+   "charge_identified": 0.09,
+   "error_established": 0.04,
+   "service_problem": 0.13,
+   "intends_to_cancel": 0.08
+  }
+ },
+ {
+  "id": "KEY-04",
+  "cat": "keyword_trap",
+  "label": "issue_refund",
+  "tool": "issue_refund",
+  "ms": 207.99887500470504,
+  "cost": 6.640200000000002e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.03,
+   "needs_account_data": 0.92,
+   "charge_identified": 0.98,
+   "error_established": 0.97,
+   "service_problem": 0.04,
+   "intends_to_cancel": 0.08
+  }
+ },
+ {
+  "id": "KEY-05",
+  "cat": "keyword_trap",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 189.33170899981633,
+  "cost": 6.547800000000001e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.04,
+   "needs_account_data": 0.82,
+   "charge_identified": 0.06,
+   "error_established": 0.03,
+   "service_problem": 0.62,
+   "intends_to_cancel": 0.32
+  }
+ },
+ {
+  "id": "KEY-06",
+  "cat": "keyword_trap",
+  "label": "get_account_summary",
+  "tool": "transfer_to_human",
+  "ms": 196.20949996169657,
+  "cost": 6.505800000000001e-05,
+  "sem": {
+   "requests_human": 0.04,
+   "unauthorized_access": 0.05,
+   "needs_account_data": 0.58,
+   "charge_identified": 0.09,
+   "error_established": 0.03,
+   "service_problem": 0.1,
+   "intends_to_cancel": 0.11
+  }
+ },
+ {
+  "id": "KEY-07",
+  "cat": "keyword_trap",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 209.2719579814002,
+  "cost": 6.514200000000001e-05,
+  "sem": {
+   "requests_human": 0.06,
+   "unauthorized_access": 0.06,
+   "needs_account_data": 0.87,
+   "charge_identified": 0.05,
+   "error_established": 0.02,
+   "service_problem": 0.96,
+   "intends_to_cancel": 0.04
+  }
+ },
+ {
+  "id": "KEY-08",
+  "cat": "keyword_trap",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 203.60570901539177,
+  "cost": 6.5016e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.03,
+   "needs_account_data": 0.82,
+   "charge_identified": 0.05,
+   "error_established": 0.02,
+   "service_problem": 0.53,
+   "intends_to_cancel": 0.04
+  }
+ },
+ {
+  "id": "KEY-09",
+  "cat": "keyword_trap",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 156.11616597743705,
+  "cost": 6.514200000000001e-05,
+  "sem": {
+   "requests_human": 0.97,
+   "unauthorized_access": 0.05,
+   "needs_account_data": 0.87,
+   "charge_identified": 0.05,
+   "error_established": 0.06,
+   "service_problem": 0.08,
+   "intends_to_cancel": 0.04
+  }
+ },
+ {
+  "id": "KEY-10",
+  "cat": "keyword_trap",
+  "label": "report_fraud",
+  "tool": "report_fraud",
+  "ms": 231.17645899765193,
+  "cost": 6.531e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.94,
+   "needs_account_data": 0.92,
+   "charge_identified": 0.72,
+   "error_established": 0.11,
+   "service_problem": 0.06,
+   "intends_to_cancel": 0.06
+  }
+ },
+ {
+  "id": "SEQ-01",
+  "cat": "sequencing",
+  "label": "run_line_diagnostics",
+  "tool": "run_line_diagnostics",
+  "ms": 217.88862498942763,
+  "cost": 6.589800000000001e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.04,
+   "needs_account_data": 0.56,
+   "charge_identified": 0.08,
+   "error_established": 0.02,
+   "service_problem": 0.94,
+   "intends_to_cancel": 0.14
+  }
+ },
+ {
+  "id": "SEQ-02",
+  "cat": "sequencing",
+  "label": "schedule_technician",
+  "tool": "schedule_technician",
+  "ms": 166.0362919792533,
+  "cost": 6.5814e-05,
+  "sem": {
+   "requests_human": 0.04,
+   "unauthorized_access": 0.04,
+   "needs_account_data": 0.64,
+   "charge_identified": 0.08,
+   "error_established": 0.03,
+   "service_problem": 0.97,
+   "intends_to_cancel": 0.06
+  }
+ },
+ {
+  "id": "SEQ-03",
+  "cat": "sequencing",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 175.93341699102893,
+  "cost": 6.493200000000001e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.03,
+   "needs_account_data": 0.84,
+   "charge_identified": 0.04,
+   "error_established": 0.02,
+   "service_problem": 0.98,
+   "intends_to_cancel": 0.05
+  }
+ },
+ {
+  "id": "SEQ-04",
+  "cat": "sequencing",
+  "label": "check_outage_status",
+  "tool": "run_line_diagnostics",
+  "ms": 182.19274998409674,
+  "cost": 6.5268e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.05,
+   "needs_account_data": 0.58,
+   "charge_identified": 0.07,
+   "error_established": 0.03,
+   "service_problem": 0.63,
+   "intends_to_cancel": 0.04
+  }
+ },
+ {
+  "id": "SEQ-05",
+  "cat": "sequencing",
+  "label": "transfer_to_human",
+  "tool": "schedule_technician",
+  "ms": 231.36991600040346,
+  "cost": 6.564600000000001e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.05,
+   "needs_account_data": 0.64,
+   "charge_identified": 0.14,
+   "error_established": 0.04,
+   "service_problem": 0.92,
+   "intends_to_cancel": 0.06
+  }
+ },
+ {
+  "id": "SEQ-06",
+  "cat": "sequencing",
+  "label": "dispute_charge",
+  "tool": "dispute_charge",
+  "ms": 195.4464170266874,
+  "cost": 6.6192e-05,
+  "sem": {
+   "requests_human": 0.04,
+   "unauthorized_access": 0.07,
+   "needs_account_data": 0.87,
+   "charge_identified": 0.97,
+   "error_established": 0.13,
+   "service_problem": 0.16,
+   "intends_to_cancel": 0.1
+  }
+ },
+ {
+  "id": "FRD-01",
+  "cat": "fraud",
+  "label": "report_fraud",
+  "tool": "report_fraud",
+  "ms": 176.00291600683704,
+  "cost": 6.5268e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.6,
+   "needs_account_data": 0.92,
+   "charge_identified": 0.09,
+   "error_established": 0.04,
+   "service_problem": 0.12,
+   "intends_to_cancel": 0.06
+  }
+ },
+ {
+  "id": "FRD-02",
+  "cat": "fraud",
+  "label": "report_fraud",
+  "tool": "report_fraud",
+  "ms": 175.6250829785131,
+  "cost": 6.556200000000001e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.8,
+   "needs_account_data": 0.93,
+   "charge_identified": 0.06,
+   "error_established": 0.02,
+   "service_problem": 0.13,
+   "intends_to_cancel": 0.05
+  }
+ },
+ {
+  "id": "FRD-03",
+  "cat": "fraud",
+  "label": "get_billing_history",
+  "tool": "report_fraud",
+  "ms": 263.8581659994088,
+  "cost": 6.5688e-05,
+  "sem": {
+   "requests_human": 0.04,
+   "unauthorized_access": 0.56,
+   "needs_account_data": 0.95,
+   "charge_identified": 0.56,
+   "error_established": 0.07,
+   "service_problem": 0.07,
+   "intends_to_cancel": 0.67
+  }
+ },
+ {
+  "id": "FRD-04",
+  "cat": "fraud",
+  "label": "report_fraud",
+  "tool": "report_fraud",
+  "ms": 212.63550000730902,
+  "cost": 6.5394e-05,
+  "sem": {
+   "requests_human": 0.04,
+   "unauthorized_access": 0.93,
+   "needs_account_data": 0.82,
+   "charge_identified": 0.06,
+   "error_established": 0.02,
+   "service_problem": 0.09,
+   "intends_to_cancel": 0.05
+  }
+ },
+ {
+  "id": "FRD-05",
+  "cat": "fraud",
+  "label": "get_billing_history",
+  "tool": "dispute_charge",
+  "ms": 159.52970797661692,
+  "cost": 6.514200000000001e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.04,
+   "needs_account_data": 0.89,
+   "charge_identified": 0.59,
+   "error_established": 0.04,
+   "service_problem": 0.1,
+   "intends_to_cancel": 0.06
+  }
+ },
+ {
+  "id": "FRD-06",
+  "cat": "fraud",
+  "label": "report_fraud",
+  "tool": "report_fraud",
+  "ms": 174.64645899599418,
+  "cost": 6.514200000000001e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.51,
+   "needs_account_data": 0.89,
+   "charge_identified": 0.03,
+   "error_established": 0.02,
+   "service_problem": 0.84,
+   "intends_to_cancel": 0.04
+  }
+ },
+ {
+  "id": "SWI-01",
+  "cat": "intent_switch",
+  "label": "get_account_summary",
+  "tool": "get_account_summary",
+  "ms": 158.20037497906014,
+  "cost": 6.5688e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.04,
+   "needs_account_data": 0.93,
+   "charge_identified": 0.05,
+   "error_established": 0.02,
+   "service_problem": 0.05,
+   "intends_to_cancel": 0.84
+  }
+ },
+ {
+  "id": "SWI-02",
+  "cat": "intent_switch",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 185.46441599028185,
+  "cost": 6.5268e-05,
+  "sem": {
+   "requests_human": 0.97,
+   "unauthorized_access": 0.08,
+   "needs_account_data": 0.72,
+   "charge_identified": 0.06,
+   "error_established": 0.02,
+   "service_problem": 0.94,
+   "intends_to_cancel": 0.04
+  }
+ },
+ {
+  "id": "SWI-03",
+  "cat": "intent_switch",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 187.88012501318008,
+  "cost": 6.564600000000001e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.05,
+   "needs_account_data": 0.9,
+   "charge_identified": 0.08,
+   "error_established": 0.03,
+   "service_problem": 0.97,
+   "intends_to_cancel": 0.04
+  }
+ },
+ {
+  "id": "SWI-04",
+  "cat": "intent_switch",
+  "label": "get_billing_history",
+  "tool": "get_billing_history",
+  "ms": 200.79733297461644,
+  "cost": 6.556200000000001e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.04,
+   "needs_account_data": 0.93,
+   "charge_identified": 0.06,
+   "error_established": 0.03,
+   "service_problem": 0.04,
+   "intends_to_cancel": 0.03
+  }
+ },
+ {
+  "id": "SWI-05",
+  "cat": "intent_switch",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 190.9526669769548,
+  "cost": 6.552000000000001e-05,
+  "sem": {
+   "requests_human": 0.23,
+   "unauthorized_access": 0.05,
+   "needs_account_data": 0.77,
+   "charge_identified": 0.05,
+   "error_established": 0.02,
+   "service_problem": 0.51,
+   "intends_to_cancel": 0.03
+  }
+ },
+ {
+  "id": "SWI-06",
+  "cat": "intent_switch",
+  "label": "change_plan",
+  "tool": "change_plan",
+  "ms": 185.09962497046217,
+  "cost": 6.5394e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.04,
+   "needs_account_data": 0.93,
+   "charge_identified": 0.06,
+   "error_established": 0.03,
+   "service_problem": 0.1,
+   "intends_to_cancel": 0.37
+  }
+ },
+ {
+  "id": "ESC-01",
+  "cat": "escalation",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 168.82229200564325,
+  "cost": 6.5394e-05,
+  "sem": {
+   "requests_human": 0.87,
+   "unauthorized_access": 0.09,
+   "needs_account_data": 0.81,
+   "charge_identified": 0.06,
+   "error_established": 0.02,
+   "service_problem": 0.88,
+   "intends_to_cancel": 0.05
+  }
+ },
+ {
+  "id": "ESC-02",
+  "cat": "escalation",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 215.48350004013628,
+  "cost": 6.535200000000001e-05,
+  "sem": {
+   "requests_human": 0.03,
+   "unauthorized_access": 0.04,
+   "needs_account_data": 0.73,
+   "charge_identified": 0.04,
+   "error_established": 0.02,
+   "service_problem": 0.96,
+   "intends_to_cancel": 0.04
+  }
+ },
+ {
+  "id": "ESC-03",
+  "cat": "escalation",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 259.7586669726297,
+  "cost": 6.480600000000002e-05,
+  "sem": {
+   "requests_human": 0.02,
+   "unauthorized_access": 0.04,
+   "needs_account_data": 0.24,
+   "charge_identified": 0.04,
+   "error_established": 0.02,
+   "service_problem": 0.04,
+   "intends_to_cancel": 0.03
+  }
+ },
+ {
+  "id": "ESC-04",
+  "cat": "escalation",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 196.3745419634506,
+  "cost": 6.472200000000001e-05,
+  "sem": {
+   "requests_human": 0.97,
+   "unauthorized_access": 0.21,
+   "needs_account_data": 0.57,
+   "charge_identified": 0.08,
+   "error_established": 0.03,
+   "service_problem": 0.4,
+   "intends_to_cancel": 0.08
+  }
+ }
+]

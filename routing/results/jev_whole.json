@@ -1,0 +1,530 @@
+[
+ {
+  "id": "STR-01",
+  "cat": "straightforward",
+  "label": "get_account_summary",
+  "tool": "get_account_summary",
+  "ms": 277.6893330155872,
+  "cost": 7.686000000000002e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "STR-02",
+  "cat": "straightforward",
+  "label": "change_plan",
+  "tool": "change_plan",
+  "ms": 259.5217910129577,
+  "cost": 7.6566e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "STR-03",
+  "cat": "straightforward",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 254.30083298124373,
+  "cost": 7.744800000000001e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "STR-04",
+  "cat": "straightforward",
+  "label": "get_billing_history",
+  "tool": "get_billing_history",
+  "ms": 269.896375015378,
+  "cost": 7.7238e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "STR-05",
+  "cat": "straightforward",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 254.61820897180587,
+  "cost": 7.686000000000002e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "STR-06",
+  "cat": "straightforward",
+  "label": "cancel_service",
+  "tool": "cancel_service",
+  "ms": 256.8888330133632,
+  "cost": 7.673400000000001e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "STR-07",
+  "cat": "straightforward",
+  "label": "get_account_summary",
+  "tool": "get_account_summary",
+  "ms": 296.63195903413,
+  "cost": 7.690200000000002e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "STR-08",
+  "cat": "straightforward",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 280.21154197631404,
+  "cost": 7.706999999999999e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "AUT-01",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "authenticate_customer",
+  "ms": 263.8789169723168,
+  "cost": 7.6398e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "AUT-02",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "authenticate_customer",
+  "ms": 219.6233340073377,
+  "cost": 7.660800000000001e-05,
+  "sem": {
+   "confidence": 0.99
+  }
+ },
+ {
+  "id": "AUT-03",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "cancel_service",
+  "ms": 245.18716702004895,
+  "cost": 7.6398e-05,
+  "sem": {
+   "confidence": 0.66
+  }
+ },
+ {
+  "id": "AUT-04",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "authenticate_customer",
+  "ms": 217.49050001380965,
+  "cost": 7.6692e-05,
+  "sem": {
+   "confidence": 0.79
+  }
+ },
+ {
+  "id": "AUT-05",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "check_outage_status",
+  "ms": 233.7779160006903,
+  "cost": 7.728e-05,
+  "sem": {
+   "confidence": 0.71
+  }
+ },
+ {
+  "id": "AUT-06",
+  "cat": "auth_first",
+  "label": "authenticate_customer",
+  "tool": "authenticate_customer",
+  "ms": 233.24395902454853,
+  "cost": 7.665e-05,
+  "sem": {
+   "confidence": 0.48
+  }
+ },
+ {
+  "id": "AUT-07",
+  "cat": "auth_first",
+  "label": "report_fraud",
+  "tool": "report_fraud",
+  "ms": 242.8720829775557,
+  "cost": 7.686000000000002e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "AUT-08",
+  "cat": "auth_first",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 231.2623750185594,
+  "cost": 7.711199999999999e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "KEY-01",
+  "cat": "keyword_trap",
+  "label": "get_billing_history",
+  "tool": "get_billing_history",
+  "ms": 170.38437497103587,
+  "cost": 7.728e-05,
+  "sem": {
+   "confidence": 0.75
+  }
+ },
+ {
+  "id": "KEY-02",
+  "cat": "keyword_trap",
+  "label": "dispute_charge",
+  "tool": "dispute_charge",
+  "ms": 201.10016595572233,
+  "cost": 7.7868e-05,
+  "sem": {
+   "confidence": 0.98
+  }
+ },
+ {
+  "id": "KEY-03",
+  "cat": "keyword_trap",
+  "label": "get_billing_history",
+  "tool": "get_billing_history",
+  "ms": 255.94995904248208,
+  "cost": 7.6986e-05,
+  "sem": {
+   "confidence": 0.68
+  }
+ },
+ {
+  "id": "KEY-04",
+  "cat": "keyword_trap",
+  "label": "issue_refund",
+  "tool": "issue_refund",
+  "ms": 167.13308403268456,
+  "cost": 7.8036e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "KEY-05",
+  "cat": "keyword_trap",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 174.25241699675098,
+  "cost": 7.711199999999999e-05,
+  "sem": {
+   "confidence": 0.74
+  }
+ },
+ {
+  "id": "KEY-06",
+  "cat": "keyword_trap",
+  "label": "get_account_summary",
+  "tool": "get_account_summary",
+  "ms": 181.40029103960842,
+  "cost": 7.686000000000002e-05,
+  "sem": {
+   "confidence": 0.37
+  }
+ },
+ {
+  "id": "KEY-07",
+  "cat": "keyword_trap",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 198.69524997193366,
+  "cost": 7.711199999999999e-05,
+  "sem": {
+   "confidence": 0.99
+  }
+ },
+ {
+  "id": "KEY-08",
+  "cat": "keyword_trap",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 196.69641699874774,
+  "cost": 7.6986e-05,
+  "sem": {
+   "confidence": 0.96
+  }
+ },
+ {
+  "id": "KEY-09",
+  "cat": "keyword_trap",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 162.10491699166596,
+  "cost": 7.711199999999999e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "KEY-10",
+  "cat": "keyword_trap",
+  "label": "report_fraud",
+  "tool": "report_fraud",
+  "ms": 229.64808298274875,
+  "cost": 7.6944e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "SEQ-01",
+  "cat": "sequencing",
+  "label": "run_line_diagnostics",
+  "tool": "run_line_diagnostics",
+  "ms": 195.0895829941146,
+  "cost": 7.8036e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "SEQ-02",
+  "cat": "sequencing",
+  "label": "schedule_technician",
+  "tool": "schedule_technician",
+  "ms": 194.37195803038776,
+  "cost": 7.761600000000001e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "SEQ-03",
+  "cat": "sequencing",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 249.34787495294586,
+  "cost": 7.6902e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "SEQ-04",
+  "cat": "sequencing",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 159.63533299509436,
+  "cost": 7.7238e-05,
+  "sem": {
+   "confidence": 0.73
+  }
+ },
+ {
+  "id": "SEQ-05",
+  "cat": "sequencing",
+  "label": "transfer_to_human",
+  "tool": "schedule_technician",
+  "ms": 268.0255839950405,
+  "cost": 7.744800000000001e-05,
+  "sem": {
+   "confidence": 0.51
+  }
+ },
+ {
+  "id": "SEQ-06",
+  "cat": "sequencing",
+  "label": "dispute_charge",
+  "tool": "dispute_charge",
+  "ms": 196.57425000332296,
+  "cost": 7.782600000000001e-05,
+  "sem": {
+   "confidence": 0.98
+  }
+ },
+ {
+  "id": "FRD-01",
+  "cat": "fraud",
+  "label": "report_fraud",
+  "tool": "report_fraud",
+  "ms": 170.04862503381446,
+  "cost": 7.690200000000002e-05,
+  "sem": {
+   "confidence": 0.99
+  }
+ },
+ {
+  "id": "FRD-02",
+  "cat": "fraud",
+  "label": "report_fraud",
+  "tool": "report_fraud",
+  "ms": 172.48979199212044,
+  "cost": 7.7196e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "FRD-03",
+  "cat": "fraud",
+  "label": "get_billing_history",
+  "tool": "get_billing_history",
+  "ms": 226.6099579865113,
+  "cost": 7.765800000000001e-05,
+  "sem": {
+   "confidence": 0.59
+  }
+ },
+ {
+  "id": "FRD-04",
+  "cat": "fraud",
+  "label": "report_fraud",
+  "tool": "report_fraud",
+  "ms": 221.01841599214822,
+  "cost": 7.702800000000001e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "FRD-05",
+  "cat": "fraud",
+  "label": "get_billing_history",
+  "tool": "get_billing_history",
+  "ms": 184.06916700769216,
+  "cost": 7.711199999999999e-05,
+  "sem": {
+   "confidence": 0.99
+  }
+ },
+ {
+  "id": "FRD-06",
+  "cat": "fraud",
+  "label": "report_fraud",
+  "tool": "report_fraud",
+  "ms": 210.36020905012265,
+  "cost": 7.677600000000001e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "SWI-01",
+  "cat": "intent_switch",
+  "label": "get_account_summary",
+  "tool": "get_account_summary",
+  "ms": 200.3669579862617,
+  "cost": 7.7322e-05,
+  "sem": {
+   "confidence": 0.99
+  }
+ },
+ {
+  "id": "SWI-02",
+  "cat": "intent_switch",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 186.76091695670038,
+  "cost": 7.7238e-05,
+  "sem": {
+   "confidence": 0.91
+  }
+ },
+ {
+  "id": "SWI-03",
+  "cat": "intent_switch",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 159.6319999662228,
+  "cost": 7.7616e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "SWI-04",
+  "cat": "intent_switch",
+  "label": "get_billing_history",
+  "tool": "get_billing_history",
+  "ms": 231.9980829488486,
+  "cost": 7.753200000000002e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "SWI-05",
+  "cat": "intent_switch",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 171.30400001769885,
+  "cost": 7.749e-05,
+  "sem": {
+   "confidence": 0.97
+  }
+ },
+ {
+  "id": "SWI-06",
+  "cat": "intent_switch",
+  "label": "change_plan",
+  "tool": "change_plan",
+  "ms": 194.6227090083994,
+  "cost": 7.686000000000002e-05,
+  "sem": {
+   "confidence": 0.82
+  }
+ },
+ {
+  "id": "ESC-01",
+  "cat": "escalation",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 165.53804103750736,
+  "cost": 7.7364e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ },
+ {
+  "id": "ESC-02",
+  "cat": "escalation",
+  "label": "check_outage_status",
+  "tool": "check_outage_status",
+  "ms": 153.84870901471004,
+  "cost": 7.7322e-05,
+  "sem": {
+   "confidence": 0.99
+  }
+ },
+ {
+  "id": "ESC-03",
+  "cat": "escalation",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 235.2641670149751,
+  "cost": 7.677600000000001e-05,
+  "sem": {
+   "confidence": 0.47
+  }
+ },
+ {
+  "id": "ESC-04",
+  "cat": "escalation",
+  "label": "transfer_to_human",
+  "tool": "transfer_to_human",
+  "ms": 246.3624170050025,
+  "cost": 7.6692e-05,
+  "sem": {
+   "confidence": 1.0
+  }
+ }
+]
