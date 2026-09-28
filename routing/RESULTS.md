@@ -1,4 +1,4 @@
-# Tool routing benchmark — v0.1 results
+# Tool routing benchmark, v0.1 results
 
 **Question:** given the conversation so far, which of 12 tools should a telecom voice
 agent run next?
@@ -64,11 +64,11 @@ representation to the shape of the decision rather than decomposing by reflex.
 
 A meaningful share of the decomposed arms' errors are **my rule engine, not the models**:
 
-- `SEQ-04` ("you said there's an outage, when will it be fixed?") — my engine has no way
+- `SEQ-04` ("you said there's an outage, when will it be fixed?"): my engine has no way
   to express "asking about the status of a known outage," so it advances to diagnostics.
-- `SEQ-05` (outage checked, diagnostics run, technician visit failed) — my R6 chain has
+- `SEQ-05` (outage checked, diagnostics run, technician visit failed): my R6 chain has
   no terminal state, so it returns `schedule_technician` forever.
-- `KEY-01` — my `charge_identified` question says "named or surfaced in this
+- `KEY-01`: my `charge_identified` question says "named or surfaced in this
   conversation." The caller did say "forty dollar charge," so the models answered
   correctly and my rule then routed wrong. That is a question-wording bug.
 

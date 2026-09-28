@@ -7,14 +7,14 @@ generating the reply.
 This repo measures what happens when you pull that decision out and give it to a model built
 for bounded decisions instead. Two experiments, both run live against real APIs:
 
-- **[`routing/`](routing/RESULTS.md)** — the routing decision on its own. 48 caller scenarios,
+- **[`routing/`](routing/RESULTS.md)**: the routing decision on its own. 48 caller scenarios,
   a 12-tool catalog, 8 ordered routing rules, five different routers.
-- **[`e2e/`](e2e/RESULTS.md)** — a full turn end to end. Deepgram Flux STT → route → tool →
+- **[`e2e/`](e2e/RESULTS.md)**: a full turn end to end. Deepgram Flux STT → route → tool →
   gpt-4.1-mini streaming into Deepgram Flux TTS, timed from end of caller speech to first
   audio out.
 
-**▶ [Watch the routing race in your browser](https://hasan-jilani.github.io/voice-agent-decision-layer/)**
-— a replay of all 48 decisions at their actually measured latency and cost.
+**▶ [Watch the routing race in your browser](https://hasan-jilani.github.io/voice-agent-decision-layer/)**,
+a replay of all 48 decisions at their actually measured latency and cost.
 
 ![routing race](docs/img/tool_routing_wide.gif)
 
@@ -35,7 +35,7 @@ with the same routing spec in context.
 
 ## The end-to-end result
 
-12 scenarios, measured from `EndOfTurn` to the first audio frame out of TTS — the gap a caller
+12 scenarios, measured from `EndOfTurn` to the first audio frame out of TTS, the gap a caller
 experiences as silence:
 
 | Arm | Route p50 | Time to first audio | Correct tool |
@@ -73,7 +73,7 @@ Anything past that is language work.
 
 - **I wrote both the scenarios and the correct answers.** That is a real bias. Read the
   accuracy column as "comparable quality" rather than as a score, and open an issue if you
-  think a label is wrong — that is the most useful thing anyone could do with this.
+  think a label is wrong. That is the most useful thing anyone could do with this.
 - **Latency and cost do not depend on those labels.** Those are measured.
 - The LLM arms are nondeterministic. Re-running gives slightly different numbers; accuracy held
   stable across 3 runs, latency varies with network.

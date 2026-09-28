@@ -1,4 +1,4 @@
-# End-to-end turn latency — measured
+# End-to-end turn latency, measured
 
 **Question:** does replacing LLM tool-routing with a decision layer make a difference a
 caller would actually notice?
