@@ -133,10 +133,11 @@ button:focus-visible{outline:2px solid var(--jev);outline-offset:2px}
 </style>
 <div class="wrap">
   <p class="eyebrow">Measured replay &middot; 48 routing decisions &middot; 12 tools, 8 routing rules</p>
-  <h1>What it costs to pick the right tool</h1>
-  <p class="lede">Every turn, a voice agent has to choose which tool to call next. Both lanes
-  replay the same 48 decisions at their <b>actually measured</b> latency and token cost.
-  Nothing here is simulated except the clock.</p>
+  <h1>Your voice agent wastes half a second picking a tool</h1>
+  <p class="lede">Choosing the next tool to call is a decision a voice agent makes on nearly
+  every turn, and it is usually folded into a general LLM call. Both lanes replay the same 48
+  decisions at their <b>actually measured</b> latency and token cost. Nothing here is simulated
+  except the clock.</p>
 
   <div class="controls">
     <button id="run" type="button">Pause</button>
